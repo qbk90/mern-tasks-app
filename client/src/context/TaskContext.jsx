@@ -37,7 +37,6 @@ export const TaskContextProvider = ({ children }) => {
     try {
       const response = await createTaskRequest(task);
       console.log(response);
-      actions.resetForm();
     } catch (error) {
       console.error(error);
     }

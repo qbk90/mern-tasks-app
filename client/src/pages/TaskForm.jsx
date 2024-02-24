@@ -3,7 +3,7 @@ import { createTaskRequest } from "../api/tasks.api";
 import { useTask } from "../context/TaskContext";
 
 function TaskForm() {
-  
+const { createTask } = useTask()
 
   return (
     <div>
@@ -15,8 +15,7 @@ function TaskForm() {
         onSubmit={async (values, actions) => {
           console.log(values);
           try {
-            const response = await createTaskRequest(values);
-            console.log(response);
+            createTask(values)
             actions.resetForm();
           } catch (error) {
             console.error(error);

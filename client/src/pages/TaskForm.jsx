@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 function TaskForm() {
   const { createTask, getTask, updateTask } = useTask();
   const params = useParams();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const [task, setTask] = useState({
     title: "",
     description: "",
@@ -27,9 +27,10 @@ function TaskForm() {
   }, []);
 
   return (
-    <div>
-      <h1>{params.id ? "Edit task" : "New task"}</h1>
-
+    <div className="flex flex-col items-center m-5">
+      <h1 className="text-center text-3xl m-5">
+        {params.id ? "Edit task" : "New task"}
+      </h1>
       <Formik
         initialValues={task}
         enableReinitialize={true}
@@ -44,34 +45,45 @@ function TaskForm() {
             setTask({
               title: "",
               description: "",
-            })
-            navigate("/")
+            });
+            navigate("/");
           } catch (error) {
             console.error(error);
           }
         }}
       >
         {({ handleChange, handleSubmit, values, isSubmitting }) => (
-          <Form onSubmit={handleSubmit}>
-            <label>Title</label>
-            <input
-              type="text"
-              name="title"
-              placeholder="Write a title"
-              onChange={handleChange}
-              value={values.title}
-            />
-            <label>Description</label>
-            <textarea
-              name="description"
-              rows="5"
-              placeholder="Write a description"
-              onChange={handleChange}
-              value={values.description}
-            ></textarea>
-            <button type="submit" disabled={isSubmitting}>
-              {isSubmitting ? "Saving..." : "Save"}
-            </button>
+          <Form
+            className="flex card w-96 bg-base-100 shadow-xl"
+            onSubmit={handleSubmit}
+          >
+            <div className="card-body">
+              <label className="card-title">Title</label>
+              <input
+                className="input input-bordered input-primary w-full max-w-xs"
+                type="text"
+                name="title"
+                placeholder="Write a title"
+                onChange={handleChange}
+                value={values.title}
+              />
+              <label className="card-title">Description</label>
+              <textarea
+                className="textarea textarea-secondary"
+                name="description"
+                rows="5"
+                placeholder="Write a description"
+                onChange={handleChange}
+                value={values.description}
+              ></textarea>
+              <button
+                className="btn btn-accent"
+                type="submit"
+                disabled={isSubmitting}
+              >
+                {isSubmitting ? "Saving..." : "Save"}
+              </button>
+            </div>
           </Form>
         )}
       </Formik>

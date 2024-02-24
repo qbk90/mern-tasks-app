@@ -15,9 +15,9 @@ function TasksPage() {
   }
 
   return (
-    <div>
-      <h1>Tasks</h1>
-      {renderMain()}
+    <div className="flex-col">
+      <h1 className="text-center text-3xl">Tasks</h1>
+      <div className="flex flex-wrap justify-center p-5">{renderMain()}</div>
     </div>
   );
 }
